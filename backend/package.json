@@ -1,0 +1,51 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "mocha \"dist/tests/**/*tests.js\"",
+    "start": "nodemon src/app.ts",
+    "build": "tsc",
+    "dev": "ts-node src/app.ts",
+    "watch-ts": "tsc -w",
+    "lint-fix:prettier": "prettier --write --loglevel warn \"src/**/*.ts\" \"tests/**/*.ts\""  
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^22.10.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "@types/chai": "^5.0.1",
+    "@types/cors": "^2.8.17",
+    "@types/mocha": "^10.0.10",
+    "@types/sqlite3": "^3.1.11",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.21.0",
+    "@typescript-eslint/parser": "^8.21.0",
+    "chai": "^4.2.0",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "mocha": "^11.1.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "sqlite3": "^5.1.7",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

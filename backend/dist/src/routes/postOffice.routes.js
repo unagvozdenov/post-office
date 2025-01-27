@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const postOffice_controller_1 = require("../controllers/postOffice.controller");
+const router = (0, express_1.Router)();
+const postOfficeController = new postOffice_controller_1.PostOfficeController();
+router.post("/", postOfficeController.createPostOffice);
+router.get("/", postOfficeController.getPostOffices.bind(postOfficeController));
+router.get("/:zipCode", postOfficeController.getPostOfficeByZipCode);
+router.put("/:zipCode", postOfficeController.updatePostOffice);
+router.delete("/:zipCode", postOfficeController.deletePostOffice);
+exports.default = router;
