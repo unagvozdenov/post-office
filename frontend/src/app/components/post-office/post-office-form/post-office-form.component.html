@@ -1,0 +1,110 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h5>{{ isEditMode ? "Edit" : "Create" }} Post Office</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="postOfficeForm" (ngSubmit)="onSubmit()">
+        <!-- ZIP Code Field -->
+        <div class="mb-3">
+          <label for="zipCode" class="form-label">ZIP Code</label>
+          <input
+            type="text"
+            class="form-control"
+            id="zipCode"
+            formControlName="zipCode"
+            placeholder="Enter ZIP code"
+            [ngClass]="{ 'is-invalid': submitted && f['zipCode'].errors} "
+            [readonly]="isEditMode"/>
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && f['zipCode'].errors"
+          >
+            <div *ngIf="f['zipCode'].errors['required']">
+              ZIP code is required
+            </div>
+            <div *ngIf="f['zipCode'].errors['pattern']">
+              ZIP code must be 5 digits
+            </div>
+            <div *ngIf="f['zipCode'].errors?.['backend']">
+              {{ f["zipCode"].errors["backend"] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Name Field -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Post Office Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            placeholder="Enter post office name"
+            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+          />
+          <div class="invalid-feedback" *ngIf="submitted && f['name'].errors">
+            <div *ngIf="f['name'].errors['required']">
+              Post office name is required
+            </div>
+          </div>
+        </div>
+
+        <!-- Address Field -->
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <textarea
+            class="form-control"
+            id="address"
+            formControlName="address"
+            rows="3"
+            placeholder="Enter full address"
+            [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"
+          ></textarea>
+          <div
+            class="invalid-feedback"
+            *ngIf="submitted && f['address'].errors"
+          >
+            <div *ngIf="f['address'].errors['required']">
+              Address is required
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Buttons -->
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary">
+            {{ isEditMode ? "Update" : "Create" }}
+          </button>
+          <button *ngIf="!isEditMode" type="button" class="btn btn-secondary" (click)="onReset()">
+            Reset
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary ms-auto"
+            routerLink="/"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <!-- Success Alert -->
+  <div
+    class="alert alert-success alert-dismissible fade show mt-3"
+    role="alert"
+    *ngIf="showSuccess"
+  >
+    Post office created successfully!
+    <button
+      type="button"
+      class="btn-close"
+      (click)="showSuccess = false"
+    ></button>
+  </div>
+</div>

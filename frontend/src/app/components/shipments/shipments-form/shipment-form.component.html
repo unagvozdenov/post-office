@@ -1,0 +1,107 @@
+<div class="container mt-4">
+<div class="card">
+  <div class="card-header">
+    <h5>{{ isEditMode ? "Edit" : "Create" }} Shipment</h5>
+  </div>
+
+  <form [formGroup]="shipmentForm" (ngSubmit)="onSubmit()">
+    <div class="card-body">
+      <div class="form-container">
+
+        <!-- Shipment Number Field -->
+        <div *ngIf="isEditMode" class="mb-3">
+          <label for="shipmentNumber" class="form-label">Shipment number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="shipmentNumber"
+            formControlName="shipmentNumber"
+            [disabled]="isEditMode" readonly/>
+        </div>
+
+        <!-- Type Field -->
+        <div class="mb-3">
+          <label for="type" class="form-label">Type</label>
+          <select class="form-select" formControlName="type" id="type">
+            <option value="">Select Type</option>
+            <option *ngFor="let type of shipmentTypes" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Status Field -->
+        <div *ngIf="isEditMode" class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select class="form-select" formControlName="status" id="status">
+            <option value="">Select Status</option>
+            <option *ngFor="let status of shipmentStatuses" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Actual Weight Field -->
+        <div class="mb-3">
+          <label for="actualWeight" class="form-label"
+            >Actual Weight (kg)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            formControlName="actualWeight"
+            id="actualWeight"
+          />
+        </div>
+
+        <!-- Origin Post Office Field -->
+        <div class="mb-3">
+          <label for="originZipCode" class="form-label"
+            >Origin Post Office</label
+          >
+          <select
+            class="form-select"
+            formControlName="originZipCode"
+            id="originZipCode"
+          >
+            <option value="">Select Origin Post Office</option>
+            <option *ngFor="let office of postOffices" [value]="office.zipCode">
+              {{ office.zipCode }} - {{ office.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Destination Post Office Field -->
+        <div class="mb-3">
+          <label for="destinationZipCode" class="form-label"
+            >Destination Post Office</label
+          >
+          <select
+            class="form-select"
+            formControlName="destinationZipCode"
+            id="destinationZipCode"
+          >
+            <option value="">Select Destination Post Office</option>
+            <option *ngFor="let office of postOffices" [value]="office.zipCode">
+              {{ office.zipCode }} - {{ office.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!shipmentForm.valid"
+      >
+        {{ isEditMode ? "Update" : "Create" }}
+      </button>
+      <button type="button" class="btn btn-secondary" routerLink="/">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+</div>
